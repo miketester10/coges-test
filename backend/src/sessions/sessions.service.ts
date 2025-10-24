@@ -13,7 +13,7 @@ export class SessionsService {
   ) {}
   private readonly logger = new Logger(SessionsService.name);
 
-  // Avvia un tentativo: crea Attempt e restituisce la prima domanda
+  // Avvia un tentativo: crea Attempt e restituisce il suo id
   async startAttempt(
     name: string,
     testId: string,

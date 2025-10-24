@@ -69,8 +69,15 @@ export class AttemptsService {
     // Recupera il tentativo
     const attempt = await this.sessionsService.findById(attemptId);
 
+    // Verifica che il tentativo, quindi il test, non sia già stato completato
     if (attempt.isCompleted)
       throw new BadRequestException('Hai già completato il test.');
+
+    // Verifica che tutte le domande del test siano state risposte nel tentativo corrente
+    if (attempt.answers.length < attempt.test.questions.length)
+      throw new BadRequestException(
+        'Devi rispondere a tutte le domande prima di completare il test.',
+      );
 
     // Calcola il numero di risposte corrette
     const totalCorrect = await this.prisma.attemptAnswer.count({

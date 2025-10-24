@@ -1,0 +1,1130 @@
+[{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c35c"
+  },
+  "text": "63",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c35b"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c35d"
+  },
+  "text": "72",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c35b"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c35f"
+  },
+  "text": "8",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c35e"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c360"
+  },
+  "text": "13",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c35e"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c361"
+  },
+  "text": "15",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c35e"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c362"
+  },
+  "text": "21",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c35e"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c363"
+  },
+  "text": "27",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c35e"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c364"
+  },
+  "text": "33",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c35e"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c365"
+  },
+  "text": "49",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c35e"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c366"
+  },
+  "text": "51",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c35e"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c368"
+  },
+  "text": "61",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c367"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c369"
+  },
+  "text": "60",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c367"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c36a"
+  },
+  "text": "62",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c367"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c36b"
+  },
+  "text": "59",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c367"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c36d"
+  },
+  "text": "Triangolo",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c36c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c36e"
+  },
+  "text": "Pentagono",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c36c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c36f"
+  },
+  "text": "Ottagono",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c36c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c370"
+  },
+  "text": "Ettagono",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c36c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c371"
+  },
+  "text": "Esagono",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c36c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c372"
+  },
+  "text": "Quadrato",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c36c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c373"
+  },
+  "text": "Cerchio",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c36c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c374"
+  },
+  "text": "Rombo",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c36c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c377"
+  },
+  "text": "Madrid",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c376"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c378"
+  },
+  "text": "Barcellona",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c376"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c379"
+  },
+  "text": "Valencia",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c376"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c37a"
+  },
+  "text": "Siviglia",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c376"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c37c"
+  },
+  "text": "Mar Tirreno",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c37b"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c37d"
+  },
+  "text": "Mar Ionio",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c37b"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c37e"
+  },
+  "text": "Mar Adriatico",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c37b"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c37f"
+  },
+  "text": "Mar Egeo",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c37b"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c380"
+  },
+  "text": "Mar Nero",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c37b"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c381"
+  },
+  "text": "Oceano Atlantico",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c37b"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c383"
+  },
+  "text": "Asia",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c382"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c384"
+  },
+  "text": "Europa",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c382"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c386"
+  },
+  "text": "Toronto",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c385"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c387"
+  },
+  "text": "Vancouver",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c385"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c388"
+  },
+  "text": "Ottawa",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c385"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c389"
+  },
+  "text": "Montreal",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c385"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c38a"
+  },
+  "text": "Calgary",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c385"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c38d"
+  },
+  "text": "Un generale francese",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c38c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c38e"
+  },
+  "text": "Un re inglese",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c38c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c38f"
+  },
+  "text": "Un esploratore spagnolo",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c38c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c390"
+  },
+  "text": "Un imperatore romano",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c38c"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c392"
+  },
+  "text": "476 d.C.",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c391"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c393"
+  },
+  "text": "410 d.C.",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c391"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c394"
+  },
+  "text": "500 d.C.",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c391"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c395"
+  },
+  "text": "300 d.C.",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c391"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c396"
+  },
+  "text": "1000 d.C.",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c391"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c397"
+  },
+  "text": "1492 d.C.",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c391"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c398"
+  },
+  "text": "700 d.C.",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c391"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c39a"
+  },
+  "text": "Un astronomo italiano",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c399"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c39b"
+  },
+  "text": "Un musicista tedesco",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c399"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c39c"
+  },
+  "text": "Un poeta inglese",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c399"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c39d"
+  },
+  "text": "Un generale francese",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c399"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c39e"
+  },
+  "text": "Un esploratore portoghese",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c399"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3a1"
+  },
+  "text": "Assorbire ossigeno e rilasciare anidride carbonica",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a0"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3a2"
+  },
+  "text": "Pompare sangue nel corpo",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a0"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3a3"
+  },
+  "text": "Filtrare il sangue",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a0"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3a4"
+  },
+  "text": "Produrre ormoni",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a0"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3a5"
+  },
+  "text": "Digerire il cibo",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a0"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3a7"
+  },
+  "text": "Venere",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a6"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3a8"
+  },
+  "text": "Giove",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a6"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3a9"
+  },
+  "text": "Marte",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a6"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3aa"
+  },
+  "text": "Saturno",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a6"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3ab"
+  },
+  "text": "Urano",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a6"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3ac"
+  },
+  "text": "Mercurio",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a6"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3ad"
+  },
+  "text": "Nettuno",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3a6"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3af"
+  },
+  "text": "Elefante africano",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3ae"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3b0"
+  },
+  "text": "Ippopotamo",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3ae"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3b2"
+  },
+  "text": "4",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3b1"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3b3"
+  },
+  "text": "6",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3b1"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3b4"
+  },
+  "text": "8",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3b1"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3b5"
+  },
+  "text": "3",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3b1"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3b8"
+  },
+  "text": "Steve Jobs",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3b7"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3b9"
+  },
+  "text": "Bill Gates",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3b7"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3ba"
+  },
+  "text": "Elon Musk",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3b7"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3bb"
+  },
+  "text": "Jeff Bezos",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3b7"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3bd"
+  },
+  "text": "L’unità centrale di elaborazione di un computer",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3bc"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3be"
+  },
+  "text": "Un software antivirus",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3bc"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3bf"
+  },
+  "text": "Un componente grafico",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3bc"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3c0"
+  },
+  "text": "Una memoria esterna",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3bc"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3c1"
+  },
+  "text": "Una porta USB",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3bc"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3c2"
+  },
+  "text": "Un tipo di linguaggio di programmazione",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3bc"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3c4"
+  },
+  "text": "Java",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3c3"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3c5"
+  },
+  "text": "Python",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3c3"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3c6"
+  },
+  "text": "Swift",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3c3"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3c7"
+  },
+  "text": "C#",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3c3"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3c8"
+  },
+  "text": "Ruby",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3c3"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3c9"
+  },
+  "text": "Go",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3c3"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3ca"
+  },
+  "text": "Kotlin",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3c3"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3cb"
+  },
+  "text": "PHP",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3c3"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3cc"
+  },
+  "text": "Perl",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3c3"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3cf"
+  },
+  "text": "Antoine de Saint-Exupéry",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3ce"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3d0"
+  },
+  "text": "Victor Hugo",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3ce"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3d1"
+  },
+  "text": "Charles Baudelaire",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3ce"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3d3"
+  },
+  "text": "Vincent van Gogh",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3d2"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3d4"
+  },
+  "text": "Claude Monet",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3d2"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3d5"
+  },
+  "text": "Pablo Picasso",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3d2"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3d6"
+  },
+  "text": "Salvador Dalí",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3d2"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3d7"
+  },
+  "text": "Leonardo da Vinci",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3d2"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3d8"
+  },
+  "text": "Caravaggio",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3d2"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3d9"
+  },
+  "text": "Rembrandt",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3d2"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3da"
+  },
+  "text": "Renoir",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3d2"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3dc"
+  },
+  "text": "Chitarra",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3db"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3dd"
+  },
+  "text": "Pianoforte",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3db"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3de"
+  },
+  "text": "Violino",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3db"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3df"
+  },
+  "text": "Flauto",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3db"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3e1"
+  },
+  "text": "Pyotr Ilyich Tchaikovsky",
+  "isCorrect": true,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3e0"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3e2"
+  },
+  "text": "Beethoven",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3e0"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3e3"
+  },
+  "text": "Mozart",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3e0"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3e4"
+  },
+  "text": "Vivaldi",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3e0"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3e5"
+  },
+  "text": "Chopin",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3e0"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3e6"
+  },
+  "text": "Haydn",
+  "isCorrect": false,
+  "questionId": {
+    "$oid": "68fac0317f0a83834d59c3e0"
+  }
+}]

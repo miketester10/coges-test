@@ -1,0 +1,264 @@
+[{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c35b"
+  },
+  "text": "Quanto fa 9 × 7?",
+  "position": {
+    "$numberLong": "1"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c35a"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c35e"
+  },
+  "text": "Quale dei seguenti numeri è primo?",
+  "position": {
+    "$numberLong": "2"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c35a"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c367"
+  },
+  "text": "Quanto fa 25 + 36?",
+  "position": {
+    "$numberLong": "3"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c35a"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c36c"
+  },
+  "text": "Quale figura ha 8 lati?",
+  "position": {
+    "$numberLong": "4"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c35a"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c376"
+  },
+  "text": "Qual è la capitale della Spagna?",
+  "position": {
+    "$numberLong": "1"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c375"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c37b"
+  },
+  "text": "Qual è il mare tra l’Italia e la Grecia?",
+  "position": {
+    "$numberLong": "2"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c375"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c382"
+  },
+  "text": "Quale continente ha il maggior numero di abitanti?",
+  "position": {
+    "$numberLong": "3"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c375"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c385"
+  },
+  "text": "Qual è la capitale del Canada?",
+  "position": {
+    "$numberLong": "4"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c375"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c38c"
+  },
+  "text": "Chi era Napoleone Bonaparte?",
+  "position": {
+    "$numberLong": "1"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c38b"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c391"
+  },
+  "text": "Quando cadde l’Impero Romano d’Occidente?",
+  "position": {
+    "$numberLong": "2"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c38b"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c399"
+  },
+  "text": "Chi era Galileo Galilei?",
+  "position": {
+    "$numberLong": "3"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c38b"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3a0"
+  },
+  "text": "Qual è la funzione dei polmoni?",
+  "position": {
+    "$numberLong": "1"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c39f"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3a6"
+  },
+  "text": "Quale pianeta è conosciuto come “pianeta rosso”?",
+  "position": {
+    "$numberLong": "2"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c39f"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3ae"
+  },
+  "text": "Qual è l’animale terrestre più grande?",
+  "position": {
+    "$numberLong": "3"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c39f"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3b1"
+  },
+  "text": "Quante fasi ha la Luna?",
+  "position": {
+    "$numberLong": "4"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c39f"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3b7"
+  },
+  "text": "Chi è il fondatore di Apple?",
+  "position": {
+    "$numberLong": "1"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c3b6"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3bc"
+  },
+  "text": "Che cos’è una CPU?",
+  "position": {
+    "$numberLong": "2"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c3b6"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3c3"
+  },
+  "text": "Quale linguaggio è usato per creare app Android?",
+  "position": {
+    "$numberLong": "3"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c3b6"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3ce"
+  },
+  "text": "Chi ha scritto “Il piccolo principe”?",
+  "position": {
+    "$numberLong": "1"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c3cd"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3d2"
+  },
+  "text": "Chi ha dipinto “La Notte Stellata”?",
+  "position": {
+    "$numberLong": "2"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c3cd"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3db"
+  },
+  "text": "Qual è lo strumento musicale a corde pizzicate?",
+  "position": {
+    "$numberLong": "3"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c3cd"
+  }
+},
+{
+  "_id": {
+    "$oid": "68fac0317f0a83834d59c3e0"
+  },
+  "text": "Chi ha composto “Il Lago dei Cigni”?",
+  "position": {
+    "$numberLong": "4"
+  },
+  "testId": {
+    "$oid": "68fac0317f0a83834d59c3cd"
+  }
+}]

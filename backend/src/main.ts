@@ -11,7 +11,12 @@ async function bootstrap() {
     }),
   );
 
-  app.enableCors();
+  app.enableCors({
+    origin: ['https://www.coges-test.it'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+  });
+
   await app.listen(process.env.PORT ?? 3001);
 }
 void bootstrap();

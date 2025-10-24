@@ -1,4 +1,4 @@
-# Applicazione Coges Test - Preview HERE
+# Applicazione Coges Test
 
 Un'applicazione quiz full-stack costruita con NestJS, React e MongoDB.
 

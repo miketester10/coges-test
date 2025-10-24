@@ -12,7 +12,7 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: ['https://www.coges-test.it'],
+    origin: ['https://www.coges-test.it', 'http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   });

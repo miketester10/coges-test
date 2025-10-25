@@ -172,6 +172,71 @@ REACT_APP_API_URL=http://localhost:3001
 - **API REST**: API RESTful ben strutturate
 - **Database**: Schema database ottimizzato
 
+## 🧪 Testing
+
+Il progetto include una suite completa di test per garantire la qualità del codice:
+
+### Test Implementati
+
+- **Unit Tests**: Test isolati per servizi e pipe
+- **Integration Tests**: Test per controller e flussi end-to-end
+- **Coverage**: Copertura del codice con report dettagliati
+
+### File di Test
+
+```
+backend/src/
+├── questions/
+│   ├── questions.service.spec.ts    # Unit test QuestionsService
+│   └── questions.controller.spec.ts # Integration test QuestionsController
+├── tests/
+│   └── tests.service.spec.ts       # Unit test TestsService
+└── common/pipes/
+    └── parse-object-id.pipe.spec.ts # Unit test ParseObjectIdPipe
+```
+
+### Copertura del Codice
+
+- **Questions Service**: 100% coverage
+- **Tests Service**: 100% coverage
+- **ParseObjectIdPipe**: 100% coverage
+- **Questions Controller**: 100% coverage
+
+### Comandi di Test
+
+```bash
+# Esegui tutti i test
+npm test
+
+# Esegui test con coverage
+npm run test:cov
+
+# Esegui test in watch mode
+npm run test:watch
+
+# Esegui test di debug
+npm run test:debug
+```
+
+### Tipologie di Test
+
+1. **Unit Tests per Servizi**
+
+   - Test di metodi `findAll()` e `findById()`
+   - Verifica gestione eccezioni (`NotFoundException`, `BadRequestException`)
+   - Mock appropriati per dipendenze Prisma
+
+2. **Unit Tests per Pipe**
+
+   - Validazione ObjectId MongoDB
+   - Gestione errori per ID non validi
+   - Test con diversi tipi di metadata
+
+3. **Integration Tests per Controller**
+   - Test endpoint REST
+   - Propagazione corretta delle eccezioni
+   - Verifica integrazione service-controller
+
 ## 🔧 Comandi di Sviluppo
 
 ### Backend
@@ -190,6 +255,11 @@ npm run start:prod
 npm run prisma:generate
 npm run prisma:push
 npm run prisma:seed
+
+# Testing
+npm test
+npm run test:cov
+npm run test:watch
 ```
 
 ### Frontend

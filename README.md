@@ -180,6 +180,7 @@ Il progetto include una suite completa di test per garantire la qualità del cod
 
 - **Unit Tests**: Test isolati per servizi e pipe
 - **Integration Tests**: Test per controller e flussi end-to-end
+- **End-to-End Tests**: Test completi per API endpoints
 - **Coverage**: Copertura del codice con report dettagliati
 
 ### File di Test
@@ -191,8 +192,10 @@ backend/src/
 │   └── questions.controller.spec.ts # Integration test QuestionsController
 ├── tests/
 │   └── tests.service.spec.ts       # Unit test TestsService
-└── common/pipes/
-    └── parse-object-id.pipe.spec.ts # Unit test ParseObjectIdPipe
+├── common/pipes/
+│   └── parse-object-id.pipe.spec.ts # Unit test ParseObjectIdPipe
+└── test/
+    └── getTests.e2e-spec.ts        # End-to-end test API Tests
 ```
 
 ### Copertura del Codice
@@ -216,6 +219,9 @@ npm run test:watch
 
 # Esegui test di debug
 npm run test:debug
+
+# Esegui test end-to-end
+npm run test:e2e
 ```
 
 ### Tipologie di Test
@@ -233,9 +239,16 @@ npm run test:debug
    - Test con diversi tipi di metadata
 
 3. **Integration Tests per Controller**
+
    - Test endpoint REST
    - Propagazione corretta delle eccezioni
    - Verifica integrazione service-controller
+
+4. **End-to-End Tests per API**
+
+   - Test completi per endpoint `/tests`
+   - Verifica gestione errori e validazione
+   - Test con dati reali del database
 
 ## 🔧 Comandi di Sviluppo
 
@@ -260,6 +273,7 @@ npm run prisma:seed
 npm test
 npm run test:cov
 npm run test:watch
+npm run test:e2e
 ```
 
 ### Frontend

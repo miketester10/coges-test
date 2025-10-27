@@ -26,4 +26,9 @@ export class PrismaService
     this.logger.log('Disconnecting from the database...');
     await this.$disconnect();
   }
+
+  async clearDatabase() {
+    await this.$runCommandRaw({ dropDatabase: 1 });
+    this.logger.log('Database cleared.');
+  }
 }

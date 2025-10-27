@@ -4,6 +4,8 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { Server } from 'http';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { seed } from '../prisma/seed';
 
 interface TestData {
   id: string;
@@ -33,11 +35,17 @@ describe('API Test (e2e)', () => {
         transform: true,
       }),
     );
+    // Inizializza l'applicazione NestJS
     await app.init();
     server = app.getHttpServer() as Server;
+
+    // Pulisce il database prima di eseguire i test
+    const prismaService = app.get<PrismaService>(PrismaService);
+    await prismaService.clearDatabase();
   });
 
   afterAll(async () => {
+    // Chiude l'applicazione NestJS dopo i test
     await app.close();
     server.close();
   });
@@ -48,12 +56,14 @@ describe('API Test (e2e)', () => {
         .get('/tests')
         .expect(200)
         .then((res) => {
-          // Il database potrebbe già contenere test, quindi verifichiamo solo che sia un array
           expect(Array.isArray(res.body)).toBe(true);
+          const tests = res.body as TestData[];
+          expect(tests.length).toBe(0);
         });
     });
 
     it('GET /tests con dati', async () => {
+      await seed(); // Popola il database con dati di test
       await request(server)
         .get('/tests')
         .expect(200)

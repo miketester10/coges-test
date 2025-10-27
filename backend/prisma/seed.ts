@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-async function main() {
+export async function seed() {
   // Crea utenti di test
   await prisma.user.create({
     data: {
@@ -401,8 +401,11 @@ async function main() {
   console.log('✅ Seed completato con successo!');
 }
 
-main()
-  .catch((e) => console.error((e as Error).message))
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+// Esegui il seed solo se il file viene chiamato direttamente (non importato)
+if (require.main === module) {
+  seed()
+    .catch((e) => console.error((e as Error).message))
+    .finally(async () => {
+      await prisma.$disconnect();
+    });
+}

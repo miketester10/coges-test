@@ -47,7 +47,6 @@ describe('API Test (e2e)', () => {
   afterAll(async () => {
     // Chiude l'applicazione NestJS dopo i test
     await app.close();
-    server.close();
   });
 
   describe('Recupera tutti i test', () => {

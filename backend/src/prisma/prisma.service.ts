@@ -28,9 +28,9 @@ export class PrismaService
     await this.$disconnect();
   }
 
-  async seed(): Promise<void> {
-    await seed(this);
-  }
+  // async seed(): Promise<void> {
+  //   await seed(this);
+  // }
 
   async clearDatabase(): Promise<void> {
     await this.$runCommandRaw({ dropDatabase: 1 });

@@ -5,6 +5,7 @@ import request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { Server } from 'http';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 interface TestData {
   id: string;
@@ -23,6 +24,48 @@ describe('API Test (e2e)', () => {
   let server: Server;
   let prismaService: PrismaService;
 
+  const createTest = (): Prisma.TestCreateInput => ({
+    title: `Test ${Math.random().toString(36).substring(7)}`,
+    description: 'Descrizione test generica',
+    questions: {
+      create: [
+        {
+          text: 'Domanda di esempio 1',
+          position: 1,
+          options: {
+            create: [
+              { text: 'Opzione 1', isCorrect: true },
+              { text: 'Opzione 2', isCorrect: false },
+              { text: 'Opzione 3', isCorrect: false },
+            ],
+          },
+        },
+        {
+          text: 'Domanda di esempio 2',
+          position: 2,
+          options: {
+            create: [
+              { text: 'Opzione 1', isCorrect: true },
+              { text: 'Opzione 2', isCorrect: false },
+              { text: 'Opzione 3', isCorrect: false },
+              { text: 'Opzione 4', isCorrect: false },
+            ],
+          },
+        },
+        {
+          text: 'Domanda di esempio 3',
+          position: 3,
+          options: {
+            create: [
+              { text: 'Opzione 1', isCorrect: true },
+              { text: 'Opzione 2', isCorrect: false },
+            ],
+          },
+        },
+      ],
+    },
+  });
+
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
@@ -38,10 +81,18 @@ describe('API Test (e2e)', () => {
     // Inizializza l'applicazione NestJS
     await app.init();
     server = app.getHttpServer() as Server;
-
-    // Pulisce il database prima di eseguire i test
     prismaService = app.get<PrismaService>(PrismaService);
+  });
+
+  beforeEach(async () => {
+    // Pulisce il database
     await prismaService.clearDatabase();
+    // Crea 3 test di esempio
+    await Promise.all([
+      prismaService.test.create({ data: createTest() }),
+      prismaService.test.create({ data: createTest() }),
+      prismaService.test.create({ data: createTest() }),
+    ]);
   });
 
   afterAll(async () => {
@@ -51,6 +102,7 @@ describe('API Test (e2e)', () => {
 
   describe('Recupera tutti i test', () => {
     it('GET /tests senza dati', async () => {
+      await prismaService.clearDatabase();
       await request(server)
         .get('/tests')
         .expect(200)
@@ -62,7 +114,6 @@ describe('API Test (e2e)', () => {
     });
 
     it('GET /tests con dati', async () => {
-      await prismaService.seed();
       await request(server)
         .get('/tests')
         .expect(200)
@@ -73,12 +124,17 @@ describe('API Test (e2e)', () => {
             tests.forEach((test: TestData) => {
               const { id, title, description, _count } = test;
               expect(id).toBeDefined();
+              expect(typeof id).toBe('string');
               expect(title).toBeDefined();
+              expect(typeof title).toBe('string');
+              expect(title.length).toBeGreaterThan(0);
               expect(description).toBeDefined();
+              expect(typeof description).toBe('string');
               expect(_count).toBeDefined();
+              expect(_count!.questions).toBeGreaterThanOrEqual(3);
             });
           } else {
-            console.log('Nessun test disponibile');
+            fail('Nessun test disponibile');
           }
         });
     });
@@ -99,14 +155,21 @@ describe('API Test (e2e)', () => {
             const test = res.body as TestData;
             const { id, title, description, questions } = test;
             expect(id).toBe(testId);
+            expect(typeof id).toBe('string');
             expect(title).toBeDefined();
+            expect(typeof title).toBe('string');
+            expect(title.length).toBeGreaterThan(0);
             expect(description).toBeDefined();
-            expect(questions).toBeDefined();
+            expect(typeof description).toBe('string');
             expect(Array.isArray(questions)).toBe(true);
+            expect(questions!.length).toBeGreaterThanOrEqual(3);
+            questions!.forEach((question) => {
+              expect(question.id).toBeDefined();
+              expect(typeof question.id).toBe('string');
+            });
           });
       } else {
-        // Salta il test se non esistono tests nel database
-        console.log('Nessun test disponibile');
+        fail('Nessun test disponibile');
       }
     });
 

@@ -5,6 +5,7 @@ import {
   OnModuleInit,
 } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
+import { seed } from '../../prisma/seed';
 
 @Injectable()
 export class PrismaService
@@ -28,7 +29,7 @@ export class PrismaService
   }
 
   async seed(): Promise<void> {
-    // TODO: Implement seed logic here
+    await seed(this);
   }
 
   async clearDatabase(): Promise<void> {

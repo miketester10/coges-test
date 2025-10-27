@@ -5,7 +5,6 @@ import request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { Server } from 'http';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { seed } from '../prisma/seed';
 
 interface TestData {
   id: string;
@@ -22,6 +21,7 @@ interface TestData {
 describe('API Test (e2e)', () => {
   let app: INestApplication;
   let server: Server;
+  let prismaService: PrismaService;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -40,7 +40,7 @@ describe('API Test (e2e)', () => {
     server = app.getHttpServer() as Server;
 
     // Pulisce il database prima di eseguire i test
-    const prismaService = app.get<PrismaService>(PrismaService);
+    prismaService = app.get<PrismaService>(PrismaService);
     await prismaService.clearDatabase();
   });
 
@@ -62,7 +62,7 @@ describe('API Test (e2e)', () => {
     });
 
     it('GET /tests con dati', async () => {
-      // await seed(); // Popola il database con dati di test
+      await prismaService.seed();
       await request(server)
         .get('/tests')
         .expect(200)

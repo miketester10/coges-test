@@ -1,7 +1,10 @@
 import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+let prisma: PrismaClient;
 
-export async function seed() {
+export async function seed(prismaClient?: PrismaClient) {
+  // Usa l'istanza PrismaClient fornita o crea una nuova istanza
+  prisma = prismaClient ?? new PrismaClient();
+
   // Crea utenti di test
   await prisma.user.create({
     data: {

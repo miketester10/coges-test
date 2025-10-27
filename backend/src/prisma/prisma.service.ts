@@ -17,17 +17,21 @@ export class PrismaService
     super();
   }
 
-  async onModuleInit() {
+  async onModuleInit(): Promise<void> {
     this.logger.log('Connecting to the database...');
     await this.$connect();
   }
 
-  async onModuleDestroy() {
+  async onModuleDestroy(): Promise<void> {
     this.logger.log('Disconnecting from the database...');
     await this.$disconnect();
   }
 
-  async clearDatabase() {
+  async seed(): Promise<void> {
+    // TODO: Implement seed logic here
+  }
+
+  async clearDatabase(): Promise<void> {
     await this.$runCommandRaw({ dropDatabase: 1 });
     this.logger.log('Database cleared.');
   }

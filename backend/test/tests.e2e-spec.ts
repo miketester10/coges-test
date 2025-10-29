@@ -134,7 +134,7 @@ describe('API Test (e2e)', () => {
               expect(_count!.questions).toBeGreaterThanOrEqual(3);
             });
           } else {
-            fail('Nessun test disponibile');
+            throw new Error('Nessun test disponibile');
           }
         });
     });
@@ -169,7 +169,7 @@ describe('API Test (e2e)', () => {
             });
           });
       } else {
-        fail('Nessun test disponibile');
+        throw new Error('Nessun test disponibile');
       }
     });
 

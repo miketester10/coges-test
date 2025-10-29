@@ -163,6 +163,8 @@ describe('API Test (e2e)', () => {
             expect(typeof description).toBe('string');
             expect(Array.isArray(questions)).toBe(true);
             expect(questions!.length).toBeGreaterThanOrEqual(3);
+
+            // Verifica struttura delle domande
             questions!.forEach((question) => {
               expect(question.id).toBeDefined();
               expect(typeof question.id).toBe('string');

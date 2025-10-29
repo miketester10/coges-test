@@ -246,7 +246,7 @@ npm run test:e2e
 
 4. **End-to-End Tests per API**
 
-   - Test completi per endpoint `/tests`
+   - Test completi per endpoint `/tests` `/questions`
    - Verifica gestione errori e validazione
    - Test con dati reali del database
 

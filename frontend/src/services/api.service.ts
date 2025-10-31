@@ -47,11 +47,11 @@ export const createSession = async (data: CreateSessionRequest): Promise<CreateS
 // -------------------------
 
 export const submitAnswer = async (attemptId: string, data: AnswerRequest): Promise<AnswerResponse> => {
-  const response = await api.post<AnswerResponse>(`/attempts/${attemptId}/answer`, data);
+  const response = await api.put<AnswerResponse>(`/attempts/${attemptId}/answer`, data);
   return response.data;
 };
 
 export const completeTest = async (attemptId: string): Promise<CompleteTestResponse> => {
-  const response = await api.post<CompleteTestResponse>(`/attempts/${attemptId}/complete`);
+  const response = await api.patch<CompleteTestResponse>(`/attempts/${attemptId}/complete`);
   return response.data;
 };

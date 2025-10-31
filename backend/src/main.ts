@@ -11,9 +11,13 @@ async function bootstrap() {
     }),
   );
 
+  // Configurazione CORS
+  const isDevelopment = process.env.NODE_ENV !== 'production';
   app.enableCors({
-    origin: ['https://www.coges-test.it', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: isDevelopment
+      ? true // Accetta tutte le origini in development
+      : ['https://www.coges-test.it', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
   });
 

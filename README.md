@@ -134,6 +134,17 @@ DATABASE_URL="mongodb://root:root@localhost:27017/coges-test-db?authSource=admin
 REACT_APP_API_URL=http://localhost:3001
 ```
 
+### Middleware di Ritardo (Solo Sviluppo)
+
+⚠️ **Nota**: Il backend include un middleware che introduce un ritardo artificiale di 500ms su tutte le richieste API.
+
+Questo middleware è stato aggiunto **esclusivamente a scopo didattico** per:
+- Simulare condizioni di latenza di rete realistiche
+- Visualizzare e testare le animazioni di caricamento dell'interfaccia
+- Dimostrare la gestione degli stati di loading nell'applicazione
+
+Il middleware si trova in `backend/src/common/middleware/delay.middleware.ts` e può essere facilmente disabilitato rimuovendo la sua registrazione in `backend/src/app.module.ts` per ottenere prestazioni complete in produzione.
+
 ## 📚 Endpoint API
 
 ### Test

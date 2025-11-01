@@ -100,6 +100,9 @@ const HomePage: React.FC = () => {
   // Determina lo stato di loading complessivo
   const isLoading = testsLoading || testDetailLoading || createSessionMutation.isPending;
 
+  // Controlla se ci sono test disponibili
+  const noTestsAvailable = (!tests || tests.length === 0) && !testsLoading;
+
   // Messaggi di errore da visualizzare
   const getDisplayError = (): string | string[] | null => {
     if (validationError) {
@@ -141,7 +144,7 @@ const HomePage: React.FC = () => {
               }}
               className="form-input"
               placeholder="Inserisci il tuo nome"
-              disabled={isLoading}
+              disabled={isLoading || noTestsAvailable}
             />
           </div>
 
@@ -150,31 +153,39 @@ const HomePage: React.FC = () => {
             <label htmlFor="test" className="form-label">
               Scegli un test *
             </label>
-            <select
-              id="test"
-              value={selectedTestId}
-              onChange={(e) => {
-                setSelectedTestId(e.target.value);
-                setValidationError("");
-              }}
-              className="form-select"
-              disabled={isLoading}
-            >
-              <option value="">-- Seleziona un test --</option>
-              {tests?.map((test) => (
-                <option key={test.id} value={test.id}>
-                  {test.title} ({test._count.questions} domande)
-                </option>
-              ))}
-            </select>
-            {selectedTestId && <p className="mt-2 text-sm text-gray-600">{tests?.find((t) => t.id === selectedTestId)?.description}</p>}
+
+            {/* Warning se non ci sono test disponibili */}
+            {noTestsAvailable ? (
+              <div className="alert alert-warning">⚠️ Nessun test disponibile al momento</div>
+            ) : (
+              <>
+                <select
+                  id="test"
+                  value={selectedTestId}
+                  onChange={(e) => {
+                    setSelectedTestId(e.target.value);
+                    setValidationError("");
+                  }}
+                  className="form-select"
+                  disabled={isLoading}
+                >
+                  <option value="">-- Seleziona un test --</option>
+                  {tests?.map((test) => (
+                    <option key={test.id} value={test.id}>
+                      {test.title} ({test._count.questions} domande)
+                    </option>
+                  ))}
+                </select>
+                {selectedTestId && <p className="mt-2 text-sm text-gray-600">{tests!.find((t) => t.id === selectedTestId)?.description}</p>}
+              </>
+            )}
           </div>
 
           {/* Error Message */}
           <ErrorDisplay error={displayError} />
 
           {/* Submit Button */}
-          <button type="submit" disabled={isLoading} className="btn btn-primary btn-full btn-lg">
+          <button type="submit" disabled={isLoading || noTestsAvailable} className="btn btn-primary btn-full btn-lg">
             {isLoading && <span className="btn-spinner"></span>}
             {isLoading ? "Caricamento..." : "Inizia il Test"}
           </button>

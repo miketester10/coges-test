@@ -5,11 +5,14 @@ import { getQuestionById, submitAnswer, completeTest } from "../services/api.ser
 import { useSessionStore } from "../store/useSessionStore";
 import { AnswerRequest, TestResult } from "../interfaces/api.interfaces";
 import { AxiosError } from "axios";
+import { answerSchema } from "../schemas/validation.schemas";
+import { ZodError } from "zod";
+import ErrorDisplay from "../components/ErrorDisplay";
 
 const TestPage: React.FC = () => {
   const navigate = useNavigate();
-  const [selectedOptionId, setSelectedOptionId] = useState("");
-  const [validationError, setValidationError] = useState("");
+  const [selectedOptionId, setSelectedOptionId] = useState<string>("");
+  const [validationError, setValidationError] = useState<string | string[]>("");
 
   // Zustand store
   const session = useSessionStore((state) => state.session);
@@ -51,11 +54,6 @@ const TestPage: React.FC = () => {
 
   // Gestore click "Prossima Domanda" / "Completa Test"
   const handleNext = async () => {
-    if (!selectedOptionId) {
-      setValidationError("Devi selezionare una risposta prima di continuare");
-      return;
-    }
-
     if (!currentQuestion) {
       return;
     }
@@ -63,13 +61,16 @@ const TestPage: React.FC = () => {
     setValidationError("");
 
     try {
-      // Invia la risposta al backend
+      // Validazione con Zod
+      const validatedData = answerSchema.parse({
+        questionId: currentQuestion.id,
+        chosenOptionId: selectedOptionId,
+      });
+
+      // Invia la risposta al backend con i dati validati
       await submitAnswerMutation.mutateAsync({
         attemptId: session.attemptId,
-        data: {
-          questionId: currentQuestion.id,
-          chosenOptionId: selectedOptionId,
-        },
+        data: validatedData,
       });
 
       const isLastQuestion = session.currentQuestionIndex === session.totalQuestions - 1;
@@ -98,9 +99,13 @@ const TestPage: React.FC = () => {
         setSelectedOptionId("");
       }
     } catch (error) {
-      const errorMessage = error instanceof AxiosError ? error.response?.data?.message || error.message : error instanceof Error ? error.message : "Errore durante l'invio della risposta";
-      setValidationError(errorMessage);
-      console.error(error);
+      // Gestione errori
+      if (error instanceof ZodError) {
+        setValidationError(error.issues.map((e) => e.message));
+      } else {
+        const errorMessage = error instanceof AxiosError ? error.response?.data?.message || error.message : error instanceof Error ? error.message : "Errore durante l'invio della risposta";
+        setValidationError(errorMessage);
+      }
     }
   };
 
@@ -108,7 +113,18 @@ const TestPage: React.FC = () => {
   const isLoading = questionLoading || submitAnswerMutation.isPending || completeTestMutation.isPending;
 
   // Messaggi di errore da visualizzare
-  const displayError = validationError || (questionError ? "Errore nel caricamento della domanda" : "");
+  const getDisplayError = (): string | string[] | null => {
+    if (validationError) {
+      return validationError;
+    }
+    if (questionError) {
+      return "Errore nel caricamento della domanda";
+    }
+    return null;
+  };
+  const displayError = getDisplayError();
+
+  // Determina il progresso del test
   const progress = ((session.currentQuestionIndex + 1) / session.totalQuestions) * 100;
 
   return (
@@ -168,9 +184,9 @@ const TestPage: React.FC = () => {
             </div>
 
             {/* Error Message */}
-            {displayError && <div className="alert alert-error">{displayError}</div>}
+            <ErrorDisplay error={displayError} />
 
-            {displayError === "Hai già completato il test." ? (
+            {typeof displayError === "string" && displayError === "Hai già completato il test." ? (
               /*Show Result Button */
               <button onClick={() => navigate("/result")} className="btn btn-primary btn-full btn-lg">
                 Mostra risultato

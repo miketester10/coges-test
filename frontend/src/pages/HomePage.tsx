@@ -5,12 +5,15 @@ import { getAllTests, getTestById, createSession } from "../services/api.service
 import { useSessionStore } from "../store/useSessionStore";
 import { UserSession } from "../interfaces/api.interfaces";
 import { AxiosError } from "axios";
+import { createSessionSchema } from "../schemas/validation.schemas";
+import { ZodError } from "zod";
+import ErrorDisplay from "../components/ErrorDisplay";
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [selectedTestId, setSelectedTestId] = useState("");
-  const [validationError, setValidationError] = useState("");
+  const [name, setName] = useState<string>("");
+  const [selectedTestId, setSelectedTestId] = useState<string>("");
+  const [validationError, setValidationError] = useState<string | string[]>("");
 
   // Zustand store
   const setSession = useSessionStore((state) => state.setSession);
@@ -46,18 +49,13 @@ const HomePage: React.FC = () => {
     e.preventDefault();
     setValidationError("");
 
-    // Validazione: nome e test obbligatori
-    if (!name.trim()) {
-      setValidationError("Il nome è obbligatorio");
-      return;
-    }
-
-    if (!selectedTestId) {
-      setValidationError("Devi selezionare un test");
-      return;
-    }
-
+    // Validazione con Zod
     try {
+      const validatedData = createSessionSchema.parse({
+        name: name,
+        testId: selectedTestId,
+      });
+
       // Recupera dettagli del test (se non presenti nella cache)
       const testDetailData = testDetail || (await fetchTestDetail()).data;
 
@@ -66,19 +64,16 @@ const HomePage: React.FC = () => {
         return;
       }
 
-      // Crea nuova sessione
-      const sessionResponse = await createSessionMutation.mutateAsync({
-        name: name.trim(),
-        testId: selectedTestId,
-      });
+      // Crea nuova sessione con i dati validati
+      const sessionResponse = await createSessionMutation.mutateAsync(validatedData);
 
       // Trova il test selezionato per passare il titolo
-      const selectedTest = tests?.find((t) => t.id === selectedTestId);
+      const selectedTest = tests?.find((t) => t.id === validatedData.testId);
 
       // Crea la sessione utente
       const userSession: UserSession = {
-        name: name.trim(),
-        testId: selectedTestId,
+        name: validatedData.name,
+        testId: validatedData.testId,
         testTitle: selectedTest?.title || "Test",
         attemptId: sessionResponse.attemptId,
         questionIds: testDetailData.questions.map((q) => q.id),
@@ -92,9 +87,13 @@ const HomePage: React.FC = () => {
       // Naviga alla prima domanda
       navigate("/test");
     } catch (error) {
-      const errorMessage = error instanceof AxiosError ? error.response?.data?.message || error.message : error instanceof Error ? error.message : "Errore durante l'invio della risposta";
-      setValidationError(errorMessage);
-      console.error(error);
+      // Gestione errori
+      if (error instanceof ZodError) {
+        setValidationError(error.issues.map((e) => e.message));
+      } else {
+        const errorMessage = error instanceof AxiosError ? error.response?.data?.message || error.message : error instanceof Error ? error.message : "Errore durante l'invio della risposta";
+        setValidationError(errorMessage);
+      }
     }
   };
 
@@ -102,7 +101,19 @@ const HomePage: React.FC = () => {
   const isLoading = testsLoading || testDetailLoading || createSessionMutation.isPending;
 
   // Messaggi di errore da visualizzare
-  const displayError = validationError || (testsError ? "Errore nel caricamento dei test" : "") || (testDetailError ? `Errore nel caricamento del test selezionato` : "");
+  const getDisplayError = (): string | string[] | null => {
+    if (validationError) {
+      return validationError;
+    }
+    if (testsError) {
+      return "Errore nel caricamento dei test";
+    }
+    if (testDetailError) {
+      return "Errore nel caricamento del test selezionato";
+    }
+    return null;
+  };
+  const displayError = getDisplayError();
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
@@ -160,7 +171,7 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Error Message */}
-          {displayError && <div className="alert alert-error">{displayError}</div>}
+          <ErrorDisplay error={displayError} />
 
           {/* Submit Button */}
           <button type="submit" disabled={isLoading} className="btn btn-primary btn-full btn-lg">

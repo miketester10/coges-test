@@ -165,6 +165,7 @@ const HomePage: React.FC = () => {
 
           {/* Submit Button */}
           <button type="submit" disabled={isLoading} className="btn btn-primary btn-full btn-lg">
+            {isLoading && <span className="btn-spinner"></span>}
             {isLoading ? "Caricamento..." : "Inizia il Test"}
           </button>
         </form>

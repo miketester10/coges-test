@@ -179,6 +179,7 @@ const TestPage: React.FC = () => {
             ) : (
               /* Next Button */
               <button onClick={handleNext} disabled={isLoading} className="btn btn-primary btn-full btn-lg">
+                {isLoading && <span className="btn-spinner"></span>}
                 {isLoading ? "Invio..." : session.currentQuestionIndex === session.totalQuestions - 1 ? "Completa Test" : "Prossima Domanda"}
               </button>
             )}

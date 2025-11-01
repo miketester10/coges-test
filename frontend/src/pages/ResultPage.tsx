@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { TestResult } from "../interfaces/api.interfaces";
+import { useNavigate } from "react-router-dom";
+import { useSessionStore } from "../store/useSessionStore";
 
 const ResultPage: React.FC = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const result = location.state as TestResult | null;
+
+  // Zustand store
+  const result = useSessionStore((state) => state.result);
+  const clearSession = useSessionStore((state) => state.clearSession);
+  const clearResult = useSessionStore((state) => state.clearResult);
 
   // Redirect se non ci sono risultati
   useEffect(() => {
@@ -93,7 +96,14 @@ const ResultPage: React.FC = () => {
 
         {/* Action Buttons */}
         <div className="flex gap-4">
-          <button onClick={() => navigate("/")} className="btn btn-primary flex-1">
+          <button
+            onClick={() => {
+              clearSession();
+              clearResult();
+              navigate("/");
+            }}
+            className="btn btn-primary btn-full btn-lg"
+          >
             Torna alla Home
           </button>
         </div>

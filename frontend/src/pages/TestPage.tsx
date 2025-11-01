@@ -1,101 +1,114 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { getQuestionById, submitAnswer, completeTest } from "../services/api.service";
-import { Question, TestResult } from "../interfaces/api.interfaces";
-import { UserSession } from "../interfaces/api.interfaces";
+import { useSessionStore } from "../store/useSessionStore";
+import { AnswerRequest, TestResult } from "../interfaces/api.interfaces";
+import { AxiosError } from "axios";
 
 const TestPage: React.FC = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const session = location.state as UserSession | null;
-
-  const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [selectedOptionId, setSelectedOptionId] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [validationError, setValidationError] = useState("");
+
+  // Zustand store
+  const session = useSessionStore((state) => state.session);
+  const updateQuestionIndex = useSessionStore((state) => state.updateQuestionIndex);
+  const setResult = useSessionStore((state) => state.setResult);
+
+  // React Query per fetchare i dati
+  const currentQuestionId = session?.questionIds[session.currentQuestionIndex];
+  const {
+    data: currentQuestion,
+    isLoading: questionLoading,
+    error: questionError,
+  } = useQuery({
+    queryKey: ["question", currentQuestionId],
+    queryFn: () => getQuestionById(currentQuestionId!),
+    enabled: !!currentQuestionId,
+  });
+
+  // React Mutation per inviare risposta
+  const submitAnswerMutation = useMutation({
+    mutationFn: ({ attemptId, data }: { attemptId: string; data: AnswerRequest }) => submitAnswer(attemptId, data),
+  });
+
+  // React Mutation per completare il test
+  const completeTestMutation = useMutation({
+    mutationFn: completeTest,
+  });
 
   // Redirect se non c'è sessione
   useEffect(() => {
     if (!session || !session.attemptId) {
       navigate("/");
-      return;
     }
-    const loadCurrentQuestion = async () => {
-      if (!session) return;
-
-      try {
-        setLoading(true);
-        const questionId = session.questionIds[session.currentQuestionIndex];
-        const question = await getQuestionById(questionId);
-        setCurrentQuestion(question);
-        setSelectedOptionId("");
-      } catch (err) {
-        setError("Errore nel caricamento della domanda");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadCurrentQuestion();
   }, [session, navigate]);
 
   if (!session) {
     return null;
   }
 
+  // Gestore click "Prossima Domanda" / "Completa Test"
   const handleNext = async () => {
     if (!selectedOptionId) {
-      setError("Devi selezionare una risposta prima di continuare");
+      setValidationError("Devi selezionare una risposta prima di continuare");
       return;
     }
 
-    setError("");
-    setLoading(true);
-
-    if (!session) {
-      return null;
+    if (!currentQuestion) {
+      return;
     }
+
+    setValidationError("");
 
     try {
       // Invia la risposta al backend
-      await submitAnswer(session.attemptId, {
-        questionId: currentQuestion!.id,
-        chosenOptionId: selectedOptionId,
+      await submitAnswerMutation.mutateAsync({
+        attemptId: session.attemptId,
+        data: {
+          questionId: currentQuestion.id,
+          chosenOptionId: selectedOptionId,
+        },
       });
 
       const isLastQuestion = session.currentQuestionIndex === session.totalQuestions - 1;
 
       if (isLastQuestion) {
         // Completa il test
-        const result = await completeTest(session.attemptId);
+        const completeTestResult = await completeTestMutation.mutateAsync(session.attemptId);
+
+        // Crea il risultato
+        const testResult: TestResult = {
+          name: session.name,
+          testTitle: session.testTitle,
+          totalQuestions: session.totalQuestions,
+          totalCorrect: completeTestResult.totalCorrect,
+        };
+
+        // Salva nello store Zustand
+        setResult(testResult);
 
         // Naviga alla pagina dei risultati
-        navigate("/result", {
-          state: {
-            name: session.name,
-            testTitle: session.testTitle,
-            totalQuestions: session.totalQuestions,
-            totalCorrect: result.totalCorrect,
-          } as TestResult,
-        });
+        navigate("/result");
       } else {
         // Vai alla prossima domanda
         const nextIndex = session.currentQuestionIndex + 1;
-        navigate("/test", {
-          state: {
-            ...session,
-            currentQuestionIndex: nextIndex,
-          } as UserSession,
-          replace: true,
-        });
+        updateQuestionIndex(nextIndex);
+        setSelectedOptionId("");
       }
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Errore durante l'invio della risposta");
-      console.error(err);
-    } finally {
-      setLoading(false);
+    } catch (error) {
+      const errorMessage = error instanceof AxiosError ? error.response?.data?.message || error.message : error instanceof Error ? error.message : "Errore durante l'invio della risposta";
+      setValidationError(errorMessage);
+      console.error(error);
     }
   };
+
+  // Determina lo stato di loading complessivo
+  const isLoading = questionLoading || submitAnswerMutation.isPending || completeTestMutation.isPending;
+
+  // Messaggi di errore da visualizzare
+  const displayError = validationError || (questionError ? "Errore nel caricamento della domanda" : "") || submitAnswerMutation.error?.message || completeTestMutation.error?.message || "";
 
   const progress = ((session.currentQuestionIndex + 1) / session.totalQuestions) * 100;
 
@@ -125,7 +138,7 @@ const TestPage: React.FC = () => {
         </div>
 
         {/* Question Card */}
-        {loading && !currentQuestion ? (
+        {isLoading && !currentQuestion ? (
           <div className="card text-center">
             <div className="spinner"></div>
             <p className="mt-4 text-gray-600">Caricamento domanda...</p>
@@ -142,9 +155,9 @@ const TestPage: React.FC = () => {
                   key={option.id}
                   onClick={() => {
                     setSelectedOptionId(option.id);
-                    setError("");
+                    setValidationError("");
                   }}
-                  disabled={loading}
+                  disabled={isLoading}
                   className={`answer-option ${selectedOptionId === option.id ? "selected" : ""}`}
                 >
                   <div className="flex items-center">
@@ -156,21 +169,25 @@ const TestPage: React.FC = () => {
             </div>
 
             {/* Error Message */}
-            {error && <div className="alert alert-error">{error}</div>}
+            {displayError && <div className="alert alert-error">{displayError}</div>}
 
-            {error === "Hai già completato il test." ? (
-              /* Home Button */
-              <button onClick={() => navigate("/")} className="btn btn-primary btn-full btn-lg">
-                Torna alla Home
+            {displayError === "Hai già completato il test." ? (
+              /*Show Result Button */
+              <button onClick={() => navigate("/result")} className="btn btn-primary btn-full btn-lg">
+                Mostra risultato
               </button>
             ) : (
               /* Next Button */
-              <button onClick={handleNext} disabled={loading} className="btn btn-primary btn-full btn-lg">
-                {loading ? "Invio..." : session.currentQuestionIndex === session.totalQuestions - 1 ? "Completa Test" : "Prossima Domanda"}
+              <button onClick={handleNext} disabled={isLoading} className="btn btn-primary btn-full btn-lg">
+                {isLoading ? "Invio..." : session.currentQuestionIndex === session.totalQuestions - 1 ? "Completa Test" : "Prossima Domanda"}
               </button>
             )}
           </div>
-        ) : null}
+        ) : (
+          <div className="card text-center">
+            <p className="text-gray-600">Nessuna domanda disponibile.</p>
+          </div>
+        )}
       </div>
     </div>
   );

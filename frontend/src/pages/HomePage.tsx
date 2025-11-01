@@ -1,80 +1,109 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllTests, createSession, getTestById } from "../services/api.service";
-import { Test, UserSession } from "../interfaces/api.interfaces";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { getAllTests, getTestById, createSession } from "../services/api.service";
+import { useSessionStore } from "../store/useSessionStore";
+import { UserSession } from "../interfaces/api.interfaces";
+import { AxiosError } from "axios";
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [selectedTestId, setSelectedTestId] = useState("");
-  const [tests, setTests] = useState<Test[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [validationError, setValidationError] = useState("");
 
-  // Carica i test disponibili al mount
-  useEffect(() => {
-    loadTests();
-  }, []);
+  // Zustand store
+  const setSession = useSessionStore((state) => state.setSession);
 
-  const loadTests = async () => {
-    try {
-      const data = await getAllTests();
-      setTests(data);
-    } catch (err) {
-      setError("Errore nel caricamento dei test");
-      console.error(err);
-    }
-  };
+  // React Query per fetchare i dati
+  const {
+    data: tests,
+    isLoading: testsLoading,
+    error: testsError,
+  } = useQuery({
+    queryKey: ["tests"],
+    queryFn: getAllTests,
+  });
 
+  const {
+    data: testDetail,
+    refetch: fetchTestDetail,
+    isLoading: testDetailLoading,
+    error: testDetailError,
+  } = useQuery({
+    queryKey: ["test", selectedTestId],
+    queryFn: () => getTestById(selectedTestId),
+    enabled: !!selectedTestId,
+  });
+
+  // React Mutation per creare sessione
+  const createSessionMutation = useMutation({
+    mutationFn: createSession,
+  });
+
+  // Gestore submit form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setValidationError("");
 
     // Validazione: nome e test obbligatori
     if (!name.trim()) {
-      setError("Il nome è obbligatorio");
+      setValidationError("Il nome è obbligatorio");
       return;
     }
 
     if (!selectedTestId) {
-      setError("Devi selezionare un test");
+      setValidationError("Devi selezionare un test");
       return;
     }
 
-    setLoading(true);
-
     try {
-      // Recupera dettagli del test
-      const testDetail = await getTestById(selectedTestId);
+      // Recupera dettagli del test (se non presenti nella cache)
+      const testDetailData = testDetail || (await fetchTestDetail()).data;
+
+      if (!testDetailData) {
+        setValidationError(`Errore nel caricamento del test selezionato`);
+        return;
+      }
 
       // Crea nuova sessione
-      const sessionResponse = await createSession({
+      const sessionResponse = await createSessionMutation.mutateAsync({
         name: name.trim(),
         testId: selectedTestId,
       });
 
       // Trova il test selezionato per passare il titolo
-      const selectedTest = tests.find((t) => t.id === selectedTestId);
+      const selectedTest = tests?.find((t) => t.id === selectedTestId);
+
+      // Crea la sessione utente
+      const userSession: UserSession = {
+        name: name.trim(),
+        testId: selectedTestId,
+        testTitle: selectedTest?.title || "Test",
+        attemptId: sessionResponse.attemptId,
+        questionIds: testDetailData.questions.map((q) => q.id),
+        currentQuestionIndex: 0,
+        totalQuestions: testDetailData.questions.length,
+      };
+
+      // Salva nello store Zustand
+      setSession(userSession);
 
       // Naviga alla prima domanda
-      navigate("/test", {
-        state: {
-          name: name.trim(),
-          testId: selectedTestId,
-          testTitle: selectedTest?.title || "Test",
-          attemptId: sessionResponse.attemptId,
-          questionIds: testDetail.questions.map((q) => q.id),
-          currentQuestionIndex: 0,
-          totalQuestions: testDetail.questions.length,
-        } as UserSession,
-      });
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Errore durante la creazione della sessione");
-      console.error(err);
-    } finally {
-      setLoading(false);
+      navigate("/test");
+    } catch (error) {
+      const errorMessage = error instanceof AxiosError ? error.response?.data?.message || error.message : error instanceof Error ? error.message : "Errore durante l'invio della risposta";
+      setValidationError(errorMessage);
+      console.error(error);
     }
   };
+
+  // Determina lo stato di loading complessivo
+  const isLoading = testsLoading || testDetailLoading || createSessionMutation.isPending;
+
+  // Messaggi di errore da visualizzare
+  const displayError =
+    validationError || (testsError ? "Errore nel caricamento dei test" : "") || (testDetailError ? `Errore nel caricamento del test selezionato` : "") || createSessionMutation.error?.message || "";
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
@@ -98,11 +127,11 @@ const HomePage: React.FC = () => {
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
-                setError("");
+                setValidationError("");
               }}
               className="form-input"
               placeholder="Inserisci il tuo nome"
-              disabled={loading}
+              disabled={isLoading}
             />
           </div>
 
@@ -116,27 +145,27 @@ const HomePage: React.FC = () => {
               value={selectedTestId}
               onChange={(e) => {
                 setSelectedTestId(e.target.value);
-                setError("");
+                setValidationError("");
               }}
               className="form-select"
-              disabled={loading}
+              disabled={isLoading}
             >
               <option value="">-- Seleziona un test --</option>
-              {tests.map((test) => (
+              {tests?.map((test) => (
                 <option key={test.id} value={test.id}>
                   {test.title} ({test._count.questions} domande)
                 </option>
               ))}
             </select>
-            {selectedTestId && <p className="mt-2 text-sm text-gray-600">{tests.find((t) => t.id === selectedTestId)?.description}</p>}
+            {selectedTestId && <p className="mt-2 text-sm text-gray-600">{tests?.find((t) => t.id === selectedTestId)?.description}</p>}
           </div>
 
           {/* Error Message */}
-          {error && <div className="alert alert-error">{error}</div>}
+          {displayError && <div className="alert alert-error">{displayError}</div>}
 
           {/* Submit Button */}
-          <button type="submit" disabled={loading} className="btn btn-primary btn-full btn-lg">
-            {loading ? "Caricamento..." : "Inizia il Test"}
+          <button type="submit" disabled={isLoading} className="btn btn-primary btn-full btn-lg">
+            {isLoading ? "Caricamento..." : "Inizia il Test"}
           </button>
         </form>
 

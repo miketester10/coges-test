@@ -102,8 +102,7 @@ const HomePage: React.FC = () => {
   const isLoading = testsLoading || testDetailLoading || createSessionMutation.isPending;
 
   // Messaggi di errore da visualizzare
-  const displayError =
-    validationError || (testsError ? "Errore nel caricamento dei test" : "") || (testDetailError ? `Errore nel caricamento del test selezionato` : "") || createSessionMutation.error?.message || "";
+  const displayError = validationError || (testsError ? "Errore nel caricamento dei test" : "") || (testDetailError ? `Errore nel caricamento del test selezionato` : "");
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">

@@ -108,8 +108,7 @@ const TestPage: React.FC = () => {
   const isLoading = questionLoading || submitAnswerMutation.isPending || completeTestMutation.isPending;
 
   // Messaggi di errore da visualizzare
-  const displayError = validationError || (questionError ? "Errore nel caricamento della domanda" : "") || submitAnswerMutation.error?.message || completeTestMutation.error?.message || "";
-
+  const displayError = validationError || (questionError ? "Errore nel caricamento della domanda" : "");
   const progress = ((session.currentQuestionIndex + 1) / session.totalQuestions) * 100;
 
   return (

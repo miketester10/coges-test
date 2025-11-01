@@ -83,6 +83,9 @@ coges-test/
 - **Linguaggio**: TypeScript
 - **Routing**: React Router 7.9.4
 - **Client HTTP**: Axios 1.12.2
+- **State Management**: Zustand 5.0.8
+- **Data Fetching**: TanStack React Query 5.90.5
+- **Validazione**: Zod 4.1.12
 
 ### Database
 

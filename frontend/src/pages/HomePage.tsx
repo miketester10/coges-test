@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { getAllTests, getTestById, createSession } from "../services/api.service";
-import { useSessionStore } from "../store/useSessionStore";
+import { useStore } from "../store/useStore";
 import { UserSession } from "../interfaces/api.interfaces";
 import { AxiosError } from "axios";
 import { createSessionSchema } from "../schemas/validation.schemas";
@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
   const [validationError, setValidationError] = useState<string | string[]>("");
 
   // Zustand store
-  const setSession = useSessionStore((state) => state.setSession);
+  const { setSession } = useStore();
 
   // React Query per fetchare i dati
   const {

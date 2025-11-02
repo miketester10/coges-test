@@ -16,7 +16,7 @@ interface SessionStore {
   clearResult: () => void;
 }
 
-export const useSessionStore = create<SessionStore>()(
+export const useStore = create<SessionStore>()(
   persist(
     (set) => ({
       // Initial state
@@ -38,7 +38,7 @@ export const useSessionStore = create<SessionStore>()(
       clearResult: () => set({ result: null }),
     }),
     {
-      name: "session-storage", // Nome per il localStorage
+      name: "zustand", // Nome per il localStorage
       partialize: (state) => ({
         // Persisti solo la sessione, non i risultati
         session: state.session,

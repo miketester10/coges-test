@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { getQuestionById, submitAnswer, completeTest } from "../services/api.service";
-import { useSessionStore } from "../store/useSessionStore";
+import { useStore } from "../store/useStore";
 import { AnswerRequest, TestResult } from "../interfaces/api.interfaces";
 import { AxiosError } from "axios";
 import { answerSchema } from "../schemas/validation.schemas";
@@ -15,9 +15,7 @@ const TestPage: React.FC = () => {
   const [validationError, setValidationError] = useState<string | string[]>("");
 
   // Zustand store
-  const session = useSessionStore((state) => state.session);
-  const updateQuestionIndex = useSessionStore((state) => state.updateQuestionIndex);
-  const setResult = useSessionStore((state) => state.setResult);
+  const { session, updateQuestionIndex, setResult } = useStore();
 
   // React Query per fetchare i dati
   const currentQuestionId = session?.questionIds[session.currentQuestionIndex];

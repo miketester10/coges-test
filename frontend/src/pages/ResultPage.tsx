@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSessionStore } from "../store/useSessionStore";
+import { useStore } from "../store/useStore";
 
 const ResultPage: React.FC = () => {
   const navigate = useNavigate();
 
   // Zustand store
-  const result = useSessionStore((state) => state.result);
-  const clearSession = useSessionStore((state) => state.clearSession);
-  const clearResult = useSessionStore((state) => state.clearResult);
+  const { result, clearSession, clearResult } = useStore();
 
   // Redirect se non ci sono risultati
   useEffect(() => {

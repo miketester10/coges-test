@@ -1,13 +1,5 @@
 import React from "react";
-
-interface Test {
-  id: string;
-  title: string;
-  description: string;
-  _count: {
-    questions: number;
-  };
-}
+import { Test } from "../interfaces/api.interfaces";
 
 interface TestSelectorProps {
   tests: Test[] | undefined;
@@ -20,7 +12,7 @@ interface TestSelectorProps {
 /**
  * Componente per la selezione del test
  */
-const TestSelector: React.FC<TestSelectorProps> = ({ tests, selectedTestId, onChange, disabled = false, noTestsAvailable = false }) => {
+const TestSelector: React.FC<TestSelectorProps> = ({ tests, selectedTestId, onChange, disabled, noTestsAvailable }) => {
   const selectedTest = tests?.find((t) => t.id === selectedTestId);
 
   return (

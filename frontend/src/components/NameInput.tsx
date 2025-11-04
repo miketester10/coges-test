@@ -3,13 +3,13 @@ import React from "react";
 interface NameInputProps {
   value: string;
   onChange: (value: string) => void;
-  disabled?: boolean;
+  disabled: boolean;
 }
 
 /**
  * Componente per l'input del nome utente
  */
-const NameInput: React.FC<NameInputProps> = ({ value, onChange, disabled = false }) => {
+const NameInput: React.FC<NameInputProps> = ({ value, onChange, disabled }) => {
   return (
     <div className="form-group">
       <label htmlFor="name" className="form-label">

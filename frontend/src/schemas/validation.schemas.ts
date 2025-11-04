@@ -7,8 +7,11 @@ import { z } from "zod";
  * - testId: string (IsMongoId, IsNotEmpty)
  */
 export const createSessionSchema = z.object({
-  name: z.string().trim().min(1, { message: "Il nome è obbligatorio" }),
-  testId: z.string().trim().min(1, { message: "Devi selezionare un test prima di continuare" }),
+  name: z.string().trim().nonempty({ message: "Il nome è obbligatorio" }),
+  testId: z
+    .string()
+    .trim()
+    .regex(/^[a-f\d]{24}$/i, { message: "Devi selezionare un test prima di continuare" }),
 });
 
 /**
@@ -18,8 +21,14 @@ export const createSessionSchema = z.object({
  * - chosenOptionId: string (IsMongoId, IsNotEmpty)
  */
 export const answerSchema = z.object({
-  questionId: z.string().trim().regex(/^[a-f\d]{24}$/i, { message: "La domanda non ha un ID valido" }),
-  chosenOptionId: z.string().trim().min(1, { message: "Devi selezionare una risposta prima di continuare" }),
+  questionId: z
+    .string()
+    .trim()
+    .regex(/^[a-f\d]{24}$/i, { message: "La domanda non ha un ID valido" }),
+  chosenOptionId: z
+    .string()
+    .trim()
+    .regex(/^[a-f\d]{24}$/i, { message: "Devi selezionare una risposta prima di continuare" }),
 });
 
 // Export dei tipi inferiti dagli schema Zod

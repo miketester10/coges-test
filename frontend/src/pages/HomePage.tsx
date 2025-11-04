@@ -8,6 +8,8 @@ import { AxiosError } from "axios";
 import { createSessionSchema } from "../schemas/validation.schemas";
 import { ZodError } from "zod";
 import ErrorDisplay from "../components/ErrorDisplay";
+import NameInput from "../components/NameInput";
+import TestSelector from "../components/TestSelector";
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -130,56 +132,26 @@ const HomePage: React.FC = () => {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Nome Input */}
-          <div className="form-group">
-            <label htmlFor="name" className="form-label">
-              Il tuo nome *
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-                setValidationError("");
-              }}
-              className="form-input"
-              placeholder="Inserisci il tuo nome"
-              disabled={isLoading || noTestsAvailable}
-            />
-          </div>
+          <NameInput
+            value={name}
+            onChange={(value) => {
+              setName(value);
+              setValidationError("");
+            }}
+            disabled={isLoading || noTestsAvailable}
+          />
 
           {/* Test Selection */}
-          <div className="form-group">
-            <label htmlFor="test" className="form-label">
-              Scegli un test *
-            </label>
-
-            {/* Warning se non ci sono test disponibili */}
-            {noTestsAvailable ? (
-              <div className="alert alert-warning">⚠️ Nessun test disponibile al momento</div>
-            ) : (
-              <>
-                <select
-                  id="test"
-                  value={selectedTestId}
-                  onChange={(e) => {
-                    setSelectedTestId(e.target.value);
-                    setValidationError("");
-                  }}
-                  className="form-select"
-                  disabled={isLoading}
-                >
-                  <option value="">-- Seleziona un test --</option>
-                  {tests?.map((test) => (
-                    <option key={test.id} value={test.id}>
-                      {test.title} ({test._count.questions} domande)
-                    </option>
-                  ))}
-                </select>
-                {selectedTestId && <p className="mt-2 text-sm text-gray-600">{tests!.find((t) => t.id === selectedTestId)?.description}</p>}
-              </>
-            )}
-          </div>
+          <TestSelector
+            tests={tests}
+            selectedTestId={selectedTestId}
+            onChange={(testId) => {
+              setSelectedTestId(testId);
+              setValidationError("");
+            }}
+            disabled={isLoading}
+            noTestsAvailable={noTestsAvailable}
+          />
 
           {/* Error Message */}
           <ErrorDisplay error={displayError} />

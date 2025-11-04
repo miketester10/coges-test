@@ -8,6 +8,8 @@ import { AxiosError } from "axios";
 import { answerSchema } from "../schemas/validation.schemas";
 import { ZodError } from "zod";
 import ErrorDisplay from "../components/ErrorDisplay";
+import QuestionHeader from "../components/QuestionHeader";
+import QuestionCard from "../components/QuestionCard";
 
 const TestPage: React.FC = () => {
   const navigate = useNavigate();
@@ -122,35 +124,13 @@ const TestPage: React.FC = () => {
   };
   const displayError = getDisplayError();
 
-  // Determina il progresso del test
-  const progress = ((session.currentQuestionIndex + 1) / session.totalQuestions) * 100;
-
   return (
     <div className="min-h-screen p-4">
       <div className="container max-w-3xl mx-auto">
         {/* Header */}
-        <div className="card-lg mb-6">
-          <div className="flex justify-between items-center mb-4">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-800">{session.testTitle}</h1>
-              <p className="text-gray-600">Utente: {session.name}</p>
-            </div>
-            <div className="text-right">
-              <p className="text-sm text-gray-600">Domanda</p>
-              <p className="text-2xl font-bold text-blue-600">
-                {session.currentQuestionIndex + 1}/{session.totalQuestions}
-              </p>
-            </div>
-          </div>
+        <QuestionHeader />
 
-          {/* Progress Bar */}
-          <div className="progress-container">
-            <div className="progress-bar" style={{ width: `${progress}%` }} />
-          </div>
-          <p className="text-sm text-gray-600 mt-2 text-center">Progresso: {Math.round(progress)}%</p>
-        </div>
-
-        {/* Question Card */}
+        {/* Loading Question Card */}
         {isLoading && !currentQuestion ? (
           <div className="card text-center">
             <div className="spinner"></div>
@@ -158,28 +138,17 @@ const TestPage: React.FC = () => {
           </div>
         ) : currentQuestion ? (
           <div className="card">
-            {/* Question Text */}
-            <h2 className="text-xl font-semibold text-gray-800 mb-6">{currentQuestion.text}</h2>
-
-            {/* Answer Options */}
-            <div className="space-y-3 mb-6">
-              {currentQuestion.options.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => {
-                    setSelectedOptionId(option.id);
-                    setValidationError("");
-                  }}
-                  disabled={isLoading}
-                  className={`answer-option ${selectedOptionId === option.id ? "selected" : ""}`}
-                >
-                  <div className="flex items-center">
-                    <div className={`radio-indicator ${selectedOptionId === option.id ? "selected" : ""}`}>{selectedOptionId === option.id && <div className="radio-dot"></div>}</div>
-                    <span className="text-lg">{option.text}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
+            {/* Question Card */}
+            <QuestionCard
+              questionText={currentQuestion.text}
+              options={currentQuestion.options}
+              selectedOptionId={selectedOptionId}
+              onSelectOption={(optionId) => {
+                setSelectedOptionId(optionId);
+                setValidationError("");
+              }}
+              disabled={isLoading}
+            />
 
             {/* Error Message */}
             <ErrorDisplay error={displayError} />

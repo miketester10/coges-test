@@ -34,7 +34,6 @@ export interface Question {
 export interface AnswerOption {
   id: string;
   text: string;
-  questionId: string;
 }
 
 // -------------------------

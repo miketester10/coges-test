@@ -71,14 +71,13 @@ coges-test/
 │   └── coverage/           # Report copertura test
 ├── frontend/               # Frontend React
 │   ├── src/                # Codice sorgente
-│   │   ├── components/     # Componenti riutilizzabili
-│   │   ├── pages/          # Pagine principali
-│   │   ├── services/       # Servizi API
-│   │   ├── store/          # State management Zustand
-│   │   ├── schemas/        # Validazione Zod
-│   │   └── interfaces/     # TypeScript interfaces
+│   │   ├── components/     # 11+ componenti riutilizzabili (AnswerOption, ErrorDisplay, etc.)
+│   │   ├── pages/          # Pagine principali (HomePage, TestPage, ResultPage, NotFound)
+│   │   ├── services/       # Servizi API (api.service.ts)
+│   │   ├── store/          # State management Zustand (useStore.ts)
+│   │   ├── schemas/        # Validazione Zod (validation.schemas.ts)
+│   │   └── interfaces/     # TypeScript interfaces (api.interfaces.ts)
 │   ├── public/             # Asset statici
-│   └── build/              # Build di produzione
 └── README.md
 ```
 
@@ -218,10 +217,12 @@ Il middleware si trova in `backend/src/common/middleware/delay.middleware.ts` e 
 ### Interfaccia Utente
 
 - **Responsive**: Design adattivo per tutti i dispositivi
+- **Modulare**: Architettura modulare con 11+ componenti riutilizzabili specializzati
 - **Intuitiva**: Interfaccia utente semplice e chiara con navigazione fluida
 - **Accessibile**: Supporto per accessibilità web
 - **Loading States**: Animazioni e feedback visivi per tutte le operazioni
-- **Error Handling**: Gestione errori elegante con messaggi informativi
+- **Error Handling**: Gestione errori elegante con componente ErrorDisplay dedicato
+- **Visual Feedback**: Barre di progresso animate, icone dinamiche e stati interattivi
 
 ### Pagine Frontend
 
@@ -232,8 +233,21 @@ Il middleware si trova in `backend/src/common/middleware/delay.middleware.ts` e 
 
 ### Componenti Riutilizzabili
 
-- **ErrorDisplay**: Componente per visualizzare errori singoli o multipli in modo elegante
-- Custom CSS classes per buttons, forms, alerts e cards
+Il frontend è stato completamente modularizzato con componenti riutilizzabili e specializzati:
+
+- **AnswerOption**: Opzione di risposta singola con radio button personalizzato e stato di selezione
+- **ErrorDisplay**: Visualizzazione elegante di errori singoli o multipli con formattazione
+- **NameInput**: Campo input validato per il nome utente con label e placeholder
+- **ProgressBar**: Barra di progresso visiva con percentuale di completamento
+- **QuestionCard**: Card completa per domanda con elenco di opzioni di risposta
+- **QuestionHeader**: Header informativo con titolo test, utente e indicatore progresso
+- **ResultIcon**: Icona dinamica di successo/fallimento (con soglia 60%) e messaggio
+- **ScoreCard**: Card principale risultati con punteggio, percentuale e barra progresso animata
+- **StatsGrid**: Griglia statistica con risposte corrette ed errate in card separate
+- **TestSelector**: Dropdown selezione test con conteggio domande e descrizione dinamica
+- **UserInfoCard**: Card informativa con nome utente e titolo test completato
+
+Inoltre, l'applicazione include **custom CSS classes** per buttons, forms, alerts, cards e animazioni.
 
 ### Architettura
 
@@ -248,6 +262,7 @@ Il progetto include una suite completa di test per garantire la qualità del cod
 
 ### Test Implementati
 
+#### Backend
 - **Unit Tests**: Test isolati per servizi e pipe
 - **Integration Tests**: Test per controller e flussi end-to-end
 - **End-to-End Tests**: Test completi per API endpoints
@@ -361,9 +376,6 @@ npm start                # Avvia dev server su http://localhost:3000
 
 # Build
 npm run build            # Crea build ottimizzata per produzione
-
-# Testing
-npm test                 # Esegui test in modalità interattiva
 ```
 
 ## 📝 File di Configurazione

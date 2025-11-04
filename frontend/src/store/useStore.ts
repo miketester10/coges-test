@@ -40,8 +40,9 @@ export const useStore = create<SessionStore>()(
     {
       name: "zustand", // Nome per il localStorage
       partialize: (state) => ({
-        // Persisti solo la sessione, non i risultati
+        // Persisti solo "session" e "result"
         session: state.session,
+        result: state.result,
       }),
     }
   )

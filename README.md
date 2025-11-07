@@ -23,10 +23,15 @@ Un'applicazione quiz full-stack costruita con NestJS, React e MongoDB.
    cd coges-test
    ```
 
-2. **Avviare il database**
+2. **Avviare il database e Redis**
 
    ```bash
+   # Avviare MongoDB
    cd backend/mongo_db
+   docker compose up -d
+   
+   # Avviare Redis
+   cd ../redis
    docker compose up -d
    ```
 
@@ -68,6 +73,7 @@ coges-test/
 │   ├── test/               # Test end-to-end
 │   ├── prisma/             # Schema database e seed
 │   ├── mongo_db/           # Setup MongoDB Docker e dump database
+│   ├── redis/              # Setup Redis Docker per cache
 │   └── coverage/           # Report copertura test
 ├── frontend/               # Frontend React
 │   ├── src/                # Codice sorgente
@@ -89,6 +95,7 @@ coges-test/
 - **Linguaggio**: TypeScript
 - **Database**: MongoDB 5.0.3
 - **ORM**: Prisma 6.18.0
+- **Cache**: Redis 7.x con @nestjs/cache-manager 3.0.1
 - **Validazione**: class-validator, class-transformer
 - **Testing**: Jest 30.0.0
 - **E2E Testing**: Supertest 7.0.0
@@ -100,6 +107,7 @@ coges-test/
 - **SessionsModule**: Creazione e gestione sessioni utente
 - **AttemptsModule**: Gestione tentativi e invio risposte
 - **PrismaModule**: Integrazione database con Prisma ORM
+- **CacheModule**: Configurazione cache Redis globale con @nestjs/cache-manager
 - **Common**: Middleware di ritardo e pipe per validazione ObjectId
 
 ### Frontend
@@ -119,6 +127,16 @@ coges-test/
 - **Autenticazione**: Abilitata con credenziali root/root
 - **Porta**: 27017
 - **Volume**: Dati persistenti con `mongo_data`
+
+### Cache
+
+- **Cache Store**: Redis 7.x
+- **Cache Manager**: @nestjs/cache-manager 3.0.1 con cache-manager 7.1.1
+- **Redis Client**: @keyv/redis 5.1.1 con ioredis 5.7.0
+- **Container**: Docker con docker compose
+- **Porta**: 6379
+- **TTL**: 60 secondi (configurabile)
+- **Volume**: Dati persistenti con `redis-data`
 
 ## 📊 Schema del Database
 
@@ -151,6 +169,64 @@ Un dump completo del database è disponibile in `backend/mongo_db/database-dump/
 
 I dati possono essere importati manualmente o il database può essere popolato tramite lo script di seed Prisma (`npm run prisma:seed`).
 
+## ⚡ Cache Redis
+
+L'applicazione utilizza **Redis** come sistema di cache per migliorare le prestazioni delle API.
+
+### Caratteristiche
+
+- **Cache Interceptor**: Implementato con `@nestjs/cache-manager` e `CacheInterceptor`
+- **TTL**: 60 secondi (configurabile)
+- **Chiavi Cache**: Basate su `METHOD:URL` (es. `GET:/tests`, `GET:/questions/:id`)
+- **Store**: Redis con `@keyv/redis` e `ioredis`
+- **Configurazione**: Gestita tramite `@nestjs/config` con variabili d'ambiente
+
+### Endpoint con Cache
+
+I seguenti endpoint utilizzano la cache Redis:
+
+- ✅ `GET /tests` - Lista di tutti i test
+- ✅ `GET /tests/:id` - Dettagli di un test specifico
+- ✅ `GET /questions` - Lista di tutte le domande
+- ✅ `GET /questions/:id` - Dettagli di una domanda specifica
+
+### Comportamento Cache
+
+1. **Prima richiesta**: I dati vengono recuperati dal database MongoDB e salvati in Redis
+2. **Richieste successive**: I dati vengono serviti direttamente da Redis (cache HIT)
+3. **Scadenza**: Dopo 60 secondi, la cache scade e la prossima richiesta ricarica i dati dal database
+
+### Avvio Redis
+
+Redis può essere avviato con Docker Compose:
+
+```bash
+cd backend/redis
+docker compose up -d
+```
+
+Il container Redis sarà disponibile su `localhost:6379` con autenticazione configurata tramite variabili d'ambiente.
+
+### Verifica Cache
+
+Puoi verificare che la cache funzioni correttamente:
+
+```bash
+# Controllare le chiavi in Redis
+docker exec Redis redis-cli -a secret_password KEYS "*"
+
+# Leggere un valore specifico
+docker exec Redis redis-cli -a secret_password GET "/tests"
+```
+
+### Configurazione Cache
+
+La cache è configurata in `backend/src/app.module.ts` usando:
+
+- `CacheModule.registerAsync()` con `ConfigService`
+- `createKeyv()` da `@keyv/redis` per creare lo store Redis
+- Array `stores` per supportare cache multiple in futuro
+
 ## 🔧 Configurazione
 
 ### Variabili d'Ambiente Backend
@@ -158,8 +234,13 @@ I dati possono essere importati manualmente o il database può essere popolato t
 Crea un file `.env` nella directory `backend/` con:
 
 ```bash
+# Database
 DATABASE_URL="mongodb://root:root@localhost:27017/coges-test-db?authSource=admin&directConnection=true&retryWrites=false"
 PORT=3001  # Porta server (opzionale, default 3001)
+
+# Redis Cache
+REDIS_URL=redis://localhost:6379
+REDIS_PASSWORD=secret_password
 ```
 
 ### Variabili d'Ambiente Frontend
@@ -188,12 +269,13 @@ Il middleware si trova in `backend/src/common/middleware/delay.middleware.ts` e 
 
 ### Test
 
-- `GET /tests` - Ottenere tutti i test con conteggio domande
-- `GET /tests/:id` - Ottenere test specifico per ID con tutte le domande
+- `GET /tests` - Ottenere tutti i test con conteggio domande (✅ **Cache Redis**)
+- `GET /tests/:id` - Ottenere test specifico per ID con tutte le domande (✅ **Cache Redis**)
 
 ### Domande
 
-- `GET /questions/:id` - Ottenere domanda per ID con opzioni di risposta
+- `GET /questions` - Ottenere tutte le domande (✅ **Cache Redis**)
+- `GET /questions/:id` - Ottenere domanda per ID con opzioni di risposta (✅ **Cache Redis**)
 
 ### Sessioni
 

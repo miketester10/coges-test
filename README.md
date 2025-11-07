@@ -29,7 +29,7 @@ Un'applicazione quiz full-stack costruita con NestJS, React e MongoDB.
    # Avviare MongoDB
    cd backend/mongo_db
    docker compose up -d
-   
+
    # Avviare Redis
    cd ../redis
    docker compose up -d
@@ -345,6 +345,7 @@ Il progetto include una suite completa di test per garantire la qualità del cod
 ### Test Implementati
 
 #### Backend
+
 - **Unit Tests**: Test isolati per servizi e pipe
 - **Integration Tests**: Test per controller e flussi end-to-end
 - **End-to-End Tests**: Test completi per API endpoints

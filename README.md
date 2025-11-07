@@ -193,6 +193,7 @@ Il middleware si trova in `backend/src/common/middleware/delay.middleware.ts` e 
 
 ### Domande
 
+- `GET /questions` - Ottenere tutte le domande
 - `GET /questions/:id` - Ottenere domanda per ID con opzioni di risposta
 
 ### Sessioni

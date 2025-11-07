@@ -6,6 +6,24 @@ Un'applicazione quiz full-stack costruita con NestJS, React e MongoDB.
 
 **Il sito può essere provato qui: [https://www.coges-test.it/](https://www.coges-test.it/)**
 
+## ⚡ Cache Redis
+
+**⚠️ Nota**: L'implementazione della cache Redis è disponibile nel branch [`cache-with-redis`](https://github.com/miketester10/coges-test/tree/cache-with-redis).
+
+Per utilizzare la versione con cache Redis, esegui:
+
+```bash
+git checkout cache-with-redis
+```
+
+Il branch `cache-with-redis` include:
+- ✅ Cache Redis implementata con `@nestjs/cache-manager` v3.0.1
+- ✅ Configurazione Redis tramite `@nestjs/config` e variabili d'ambiente
+- ✅ Cache Interceptor su endpoint `/tests` e `/questions`
+- ✅ TTL configurabile (default: 60 secondi)
+- ✅ Setup Docker Compose per Redis
+- ✅ Documentazione completa nel README del branch
+
 ## 🚀 Avvio Rapido
 
 ### Prerequisiti

@@ -16,7 +16,7 @@ async function bootstrap() {
   app.enableCors({
     origin: isDevelopment
       ? true // Accetta tutte le origini in development
-      : ['https://www.coges-test.it', 'http://localhost:3000'],
+      : ['https://www.coges-test.it'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
   });

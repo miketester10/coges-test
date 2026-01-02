@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import TestPage from "./pages/TestPage";
 import ResultPage from "./pages/ResultPage";
 import NotFound from "./pages/NotFound";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Configurazione del client React Query
 const queryClient = new QueryClient({
@@ -28,6 +29,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }
